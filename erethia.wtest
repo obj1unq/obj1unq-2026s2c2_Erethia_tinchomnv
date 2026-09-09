@@ -1,3 +1,27 @@
 import rolando.*
-describe "Erethia" {
+describe "Mochila de Rolando" {
+    test "Rolando guarda objetos en la mochila, y comprueba tener la espada del destino y el libro de hechizos" {
+        rolando.recolectar(espadaDelDestino)
+        rolando.recolectar(libroDeHechizos)
+        assert.throwsException({rolando.recolectar(collarDivino)})
+        assert.that(rolando.tieneEnMochila(espadaDelDestino))
+        assert.that(rolando.tieneEnMochila(libroDeHechizos))
+        
+    }
+}
+
+describe "Rolando llega al castillo" {
+  test "Rolando recolecta, deja objetos en el castillo y vuelve a recolectar" {
+        rolando.recolectar(espadaDelDestino)
+        rolando.recolectar(libroDeHechizos)
+        rolando.llegaAlCastillo()
+        rolando.recolectar(collarDivino)
+        rolando.llegaAlCastillo()
+        assert.that(castillo.tieneEnAlmacen(libroDeHechizos))
+        assert.that(castillo.tieneEnAlmacen(espadaDelDestino))
+        assert.that(castillo.tieneEnAlmacen(collarDivino))
+    
+        
+
+  }
 }

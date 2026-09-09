@@ -18,13 +18,19 @@ object rolando {
         espacioDisponibleMochila = espacio
     }
 
-    method verContenidoMochila() {
+    method contenidoMochila() {
         return(mochila)
     }
 
     method llegaAlCastillo() {
         mochila.forEach({artefacto => castillo.almacenarArtefacto(artefacto)})
+        mochila.clear()
     }
+
+    method tieneEnMochila(_artefacto) {
+        return mochila.contains(_artefacto)
+    }
+
 }
 
 object castillo {
@@ -36,6 +42,10 @@ object castillo {
 
     method artefactosAlmacenados(_artefactosAlmacenados) {
         return (artefactosAlmacenados)
+    }
+
+    method tieneEnAlmacen(_artefacto) {
+        return artefactosAlmacenados.contains(_artefacto)
     }
 }
 
