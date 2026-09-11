@@ -20,8 +20,31 @@ describe "Rolando llega al castillo" {
         assert.that(castillo.tieneEnAlmacen(libroDeHechizos))
         assert.that(castillo.tieneEnAlmacen(espadaDelDestino))
         assert.that(castillo.tieneEnAlmacen(collarDivino))
-    
-        
+  }
+}
 
+describe "Rolando y sus pertenencias" {
+  test "Rolando tiene 3 objetos en total, solo 1 está en su mochila" {
+        rolando.recolectar(espadaDelDestino)
+        rolando.recolectar(collarDivino)
+        rolando.llegaAlCastillo()
+        rolando.recolectar(armaduraDeAceroValyrio)
+        assert.equals(3, rolando.posesiones().size())
+  }
+}
+
+describe "Historia de los encuentos de artefactos" {
+  test "Rolando encuentra y recolecta ciertos artefactos, despues vé todo lo que encontro" {
+        rolando.encontrarYRecolectarObjeto(espadaDelDestino)
+        rolando.encontrarYRecolectarObjeto(libroDeHechizos)
+        rolando.encontrar(collarDivino)
+        rolando.llegaAlCastillo()
+        rolando.encontrarYRecolectarObjeto(armaduraDeAceroValyrio)
+        rolando.encontrarYRecolectarObjeto(collarDivino)
+        assert.equals(espadaDelDestino, rolando.objetosEncontrados().get(0))
+        assert.equals(libroDeHechizos, rolando.objetosEncontrados().get(1))
+        assert.equals(collarDivino, rolando.objetosEncontrados().get(2))
+        assert.equals(armaduraDeAceroValyrio, rolando.objetosEncontrados().get(3))
+        assert.equals(collarDivino, rolando.objetosEncontrados().get(4))
   }
 }

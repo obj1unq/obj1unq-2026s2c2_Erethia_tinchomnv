@@ -1,11 +1,21 @@
 object rolando {
     var espacioDisponibleMochila = 2
     const mochila = #{}
+    const objetosEncontrados = []
+
+    method encontrar(objeto) {
+        objetosEncontrados.add(objeto)
+    }
 
     method recolectar(objeto) {
         self.validarEspacioMochila(espacioDisponibleMochila)
 
         mochila.add(objeto)
+    }
+
+    method encontrarYRecolectarObjeto(objeto) {
+        self.encontrar(objeto)
+        self.recolectar(objeto)
     }
 
     method validarEspacioMochila(_espacioDisponibleMochila) {
@@ -31,6 +41,13 @@ object rolando {
         return mochila.contains(_artefacto)
     }
 
+    method posesiones(){
+        return (self.contenidoMochila() + castillo.artefactosAlmacenados() )
+    }
+
+    method objetosEncontrados() {
+        return (objetosEncontrados)
+    }
 }
 
 object castillo {
@@ -40,7 +57,7 @@ object castillo {
         artefactosAlmacenados.add(artefacto)
     }
 
-    method artefactosAlmacenados(_artefactosAlmacenados) {
+    method artefactosAlmacenados() {
         return (artefactosAlmacenados)
     }
 
