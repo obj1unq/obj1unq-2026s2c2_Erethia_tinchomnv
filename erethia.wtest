@@ -48,3 +48,22 @@ describe "Historia de los encuentos de artefactos" {
         assert.equals(collarDivino, rolando.objetosEncontrados().get(4))
   }
 }
+
+describe "Ejemplo Batalla de rolando" {
+  test "Rolando pelea y comprueba" {
+        rolando.asignarPoderBase(5)
+        rolando.recolectar(espadaDelDestino)
+        rolando.recolectar(collarDivino)
+        rolando.recolectar(armaduraDeAceroValyrio)
+        assert.equals(19, rolando.poderDePelea())
+        rolando.pelearBatalla()
+        assert.equals(6, rolando.poderBase())
+        assert.equals(18, rolando.poderDePelea())
+        rolando.pelearBatalla()
+        assert.equals(7, rolando.poderBase())
+        assert.equals(21.5, rolando.poderDePelea())
+        rolando.pelearBatalla()
+        assert.equals(8, rolando.poderBase())
+        assert.equals(24, rolando.poderDePelea())
+  }
+}

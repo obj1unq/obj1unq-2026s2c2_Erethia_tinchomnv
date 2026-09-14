@@ -1,5 +1,6 @@
 object rolando {
-    var espacioDisponibleMochila = 2
+    var espacioDisponibleMochila = 3
+    var poderBase = 5
     const mochila = #{}
     const objetosEncontrados = []
 
@@ -48,6 +49,23 @@ object rolando {
     method objetosEncontrados() {
         return (objetosEncontrados)
     }
+
+    method asignarPoderBase(poder) {
+        poderBase = poder
+    }
+
+    method poderBase() {
+        return (poderBase)
+    }
+
+    method poderDePelea() {
+        return ( poderBase + mochila.sum({artefacto => artefacto.poderQueAporta(self)}) )
+    }
+
+    method pelearBatalla() {
+        mochila.forEach({artefacto => artefacto.usar()})
+        poderBase += 1
+    }
 }
 
 object castillo {
@@ -66,9 +84,25 @@ object castillo {
     }
 }
 
+object erethia {
+  
+}
+
 // -- Artefactos -- 
 object espadaDelDestino {
-    
+    var fueUsada = false
+
+    method usar() {
+        fueUsada = true
+    }
+
+    method poderQueAporta(personaje) {
+        if (fueUsada) {
+            return personaje.poderBase() * 0.5
+        } else {
+            return personaje.poderBase()
+        }
+    }
 }
 
 object libroDeHechizos {
@@ -76,9 +110,26 @@ object libroDeHechizos {
 }
 
 object collarDivino {
-  
+    var vecesUtilizado = 0
+
+    method usar() {
+        vecesUtilizado += 1
+    }
+
+    method poderQueAporta(personaje) {
+        return if( personaje.poderBase() > 6 ){
+            3 + vecesUtilizado
+        } else {
+            3
+        }
+    }   
 }
 
 object armaduraDeAceroValyrio {
-  
+    method usar() { 
+    }
+
+    method poderQueAporta(personaje) {
+        return (6)
+    }
 }
