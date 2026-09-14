@@ -67,3 +67,24 @@ describe "Ejemplo Batalla de rolando" {
         assert.equals(24, rolando.poderDePelea())
   }
 }
+
+describe "Ejemplo Libro de Hechizos" {
+    test "Evolucion del aporte del libro de hechizos en cada batalla" {
+      rolando.asignarPoderBase(5)
+      castillo.almacenarArtefacto(espadaDelDestino)
+      castillo.almacenarArtefacto(armaduraDeAceroValyrio)
+      castillo.almacenarArtefacto(collarDivino)
+      rolando.recolectar(libroDeHechizos)
+      assert.equals(4, libroDeHechizos.poderQueAporta(rolando))
+      assert.equals(9, rolando.poderDePelea())
+      rolando.pelearBatalla() 
+      assert.equals(6, libroDeHechizos.poderQueAporta(rolando))
+      assert.equals(12, rolando.poderDePelea())
+      rolando.pelearBatalla()
+      assert.equals(7, libroDeHechizos.poderQueAporta(rolando))
+      assert.equals(14, rolando.poderDePelea())
+      rolando.pelearBatalla() 
+      assert.equals(0, libroDeHechizos.poderQueAporta(rolando))
+      assert.equals(8, rolando.poderDePelea())
+    }
+}

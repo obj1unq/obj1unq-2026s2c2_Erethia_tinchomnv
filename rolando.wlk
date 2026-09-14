@@ -1,6 +1,7 @@
 object rolando {
     var espacioDisponibleMochila = 3
     var poderBase = 5
+    var morada = castillo
     const mochila = #{}
     const objetosEncontrados = []
 
@@ -31,6 +32,10 @@ object rolando {
 
     method contenidoMochila() {
         return(mochila)
+    }
+
+    method morada() {
+        return (morada)
     }
 
     method llegaAlCastillo() {
@@ -104,11 +109,6 @@ object espadaDelDestino {
         }
     }
 }
-
-object libroDeHechizos {
-
-}
-
 object collarDivino {
     var vecesUtilizado = 0
 
@@ -131,5 +131,45 @@ object armaduraDeAceroValyrio {
 
     method poderQueAporta(personaje) {
         return (6)
+    }
+}
+
+object libroDeHechizos {
+    const hechizos = [bendicion, invisibilidad, invocacion]
+
+    method usar() {
+        if (not hechizos.isEmpty()) {
+            hechizos.remove(hechizos.first())
+        }
+    }
+
+    method poderQueAporta(personaje) {
+        if (hechizos.isEmpty()) {
+            return 0
+        }
+
+        return hechizos.first().poderQueAporta(personaje)
+    } 
+}
+
+// -- Hechizos --
+object bendicion {
+    method poderQueAporta(personaje) = 4
+}
+
+object invisibilidad {
+    method poderQueAporta(personaje) = personaje.poderBase()
+}
+
+object invocacion {
+    method poderQueAporta(personaje) {
+        const artefactosEnCastillo = personaje.morada().artefactosAlmacenados()
+        
+        if (artefactosEnCastillo.isEmpty()) {
+            return 0
+        }
+        
+        const artefactoMasPoderoso = artefactosEnCastillo.max({ artefacto => artefacto.poderQueAporta(personaje) })
+        return artefactoMasPoderoso.poderQueAporta(personaje)
     }
 }
